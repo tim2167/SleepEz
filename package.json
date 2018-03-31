@@ -1,0 +1,24 @@
+{
+  "fitbit": {
+    "appUUID": "6bbf409b-c895-4375-9cf4-f0c7665d6d23",
+    "appType": "app",
+    "appDisplayName": "TBD",
+    "iconFile": "resources/icon.png",
+    "wipeColor": "#607d8b",
+    "requestedPermissions": [
+      "access_heart_rate",
+      "access_activity",
+      "access_location",
+      "run_background"
+    ],
+    "buildTargets": [
+      "higgs",
+      "meson"
+    ],
+    "i18n": {
+      "en": {
+        "name": "TBD"
+      }
+    }
+  }
+}
