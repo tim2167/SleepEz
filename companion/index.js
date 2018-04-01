@@ -1,15 +1,13 @@
 import { app } from "peer";
-var runBefore = 0 
-function applicationRunning () { 
-if(app.readyState == "started"){
-  runBefore +=1
-}
-if(app.readyState == "stopped" && runBefore == 1){
-  
-}
+import * as messaging from "messaging";
 
+const socket = new WebSocket('172.29.87.255:22');
+messaging.peerSocket.onmessage = function(evt) {
+  if (evt.data) {
+    // The device requested weather data
+    console.log("lol");
+  }
 }
-if(app.readyState==)
-app.
-se
-console.log(app.readyState);
+socket.addEventListener('open', function(event){
+    socket.send('Hello Server!');
+    })

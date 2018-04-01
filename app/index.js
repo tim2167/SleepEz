@@ -5,10 +5,17 @@ import {user} from "user-profile";
 import { me } from "appbit";
 import { display } from "display";
 import { vibration } from "haptics";
+
+import * as messaging from "messaging";
+
+ messaging.peerSocket.onopen = function() {
+  // Ready to send messages
+            goo;
+            }
+
 display.on = false; //need to see on real fitbit if it actually turns off.
 
 let hrmData = document.getElementById("hrm-data");
-
 
 let hrm = new HeartRateSensor();
 var cont = true;
@@ -23,14 +30,14 @@ let initRestingHeartRate = user.restingHeartRate;
 }
 var percentchange = []; 
 function refreshData() {
-    if ((timeInterval == 600000) || (timeInterval == 240000){
+   
+    if ((timeInterval == 600000) || (timeInterval == 240000)){
       hrm: {
       heartRate: hrm.heartRate ? hrm.heartRate : 0
       }
       percentchange.push((hrm - initRestingHeartRate)/(initRestingHeartRate));
       let confirm1 = percentchange[percentchange.length - 1];
       let confirm2 = percentchange[percentchange.length - 2];
-      cont = false;
       if( 0.34<=((confirm1+confirm2)/2)< 0.45 ){
          vibration.start("bump");
          setTimeout(vibration.stop, 100) // needs a response
@@ -38,7 +45,12 @@ function refreshData() {
          timeInterval = 240000
          if(vibConfirm == 2){
         //send a make the companion listen to whether the app is still on.
-            me.exit(); 
+            cont = false;
+            messaging.peerSocket.onopen = function() {
+  // Ready to send messages
+            sendMessage();
+            }
+           
          }
       }
       
@@ -50,12 +62,16 @@ function refreshData() {
     timeInterval = 600000;
   }
   percentchange.push((hrm - initRestingHeartRate)/(initRestingHeartRate));
-  console.log(percentchange);
+  
 }
-
+function sendMessage() {
+  // Sample data
+  var data = 5;
+  }
+  
 refreshData();
 console.log("hi");
 if(cont == true){
-//setInterval(refreshData, timeInterval);  //remember to uncomment this.
+setInterval(refreshData, timeInterval);  //remember to uncomment this.
 }
 console.log("done");
